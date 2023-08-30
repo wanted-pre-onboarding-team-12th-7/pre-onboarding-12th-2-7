@@ -1,9 +1,12 @@
+import { IssuesProvider } from './pages/IssuesPage'
 import PageRouter from './pages/PageRouter'
 
 function App() {
   return (
     <div>
-      <PageRouter />
+      <IssuesProvider>
+        <PageRouter />
+      </IssuesProvider>
     </div>
   )
 }

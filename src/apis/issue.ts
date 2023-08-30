@@ -16,8 +16,8 @@ export interface UserDTO {
 
 export const ISSUES_PER_PAGE = 20
 
-export const getIssuesRequest = async (pageNo: number) => {
-  const { data } = await Instance.get<IssueDTO[]>(`/repos/facebook/react/issues`, {
+export const getIssuesRequest = async (owner: string, repo: string, pageNo: number) => {
+  const { status, data } = await Instance.get(`/repos/${owner}/${repo}/issues`, {
     params: {
       state: 'open',
       sort: 'comments',
@@ -26,7 +26,7 @@ export const getIssuesRequest = async (pageNo: number) => {
     },
   })
 
-  return data
+  return { status, data }
 }
 
 export const getIssueDetailRequest = async (issueNo: number) => {
