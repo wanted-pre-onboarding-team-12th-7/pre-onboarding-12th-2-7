@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext, useEffect } from 'react'
+import { PropsWithChildren, useContext, useEffect, useCallback, useRef } from 'react'
 import { styled } from 'styled-components'
 import useIssue from '../hooks/useIssue'
 import { createContext } from 'react'
@@ -13,11 +13,12 @@ export interface IssuesContextType {
   repo: string
   setRepo: React.Dispatch<React.SetStateAction<string>>
   issueList: IssueDTO[] | undefined
-  setIssueList: React.Dispatch<React.SetStateAction<IssueDTO[] | undefined>>
+  setIssueList: React.Dispatch<React.SetStateAction<IssueDTO[]>>
   isError: boolean
   setIsError: React.Dispatch<React.SetStateAction<boolean>>
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  isPageEnd: boolean
   getIssuesApiCall: () => Promise<void>
   isAdvView: (idx: number) => boolean
   handleAdvClick: () => void
@@ -39,11 +40,29 @@ export const useFormContext = () => {
 }
 
 export default function IssuesPage() {
-  const { getIssuesApiCall, isError, isLoading } = useFormContext()
+  const { getIssuesApiCall, isError, isLoading, issueList, isPageEnd } = useFormContext()
 
   useEffect(() => {
     getIssuesApiCall()
   }, [])
+
+  const handleObserver = useCallback(
+    async ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target)
+        await getIssuesApiCall()
+        observer.observe(entry.target)
+      }
+    },
+    [issueList]
+  )
+  const loadMoreRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (!loadMoreRef.current) return
+    const observer = new IntersectionObserver(handleObserver)
+    loadMoreRef.current && observer.observe(loadMoreRef.current)
+    return () => observer && observer.disconnect()
+  }, [handleObserver])
 
   return (
     <Wrapper>
@@ -58,6 +77,7 @@ export default function IssuesPage() {
       </div>
       <Select />
       {isError ? <IssueListError /> : isLoading ? <Loading /> : <IssueList />}
+      {isPageEnd && <div ref={loadMoreRef}>observer</div>}
     </Wrapper>
   )
 }

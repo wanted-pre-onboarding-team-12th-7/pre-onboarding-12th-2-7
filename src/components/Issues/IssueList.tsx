@@ -23,7 +23,7 @@ function IssueList() {
             </div>
             <div>
               <span>User: </span>
-              {issue.user.login}
+              {issue?.user?.login}
             </div>
             <div>
               <span>Created date: </span>

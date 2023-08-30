@@ -4,18 +4,22 @@ import { IssueDTO, getIssuesRequest } from '../apis/issue'
 const useIssue = () => {
   const [owner, setOwner] = useState<string>('facebook')
   const [repo, setRepo] = useState<string>('react')
-  const [issueList, setIssueList] = useState<IssueDTO[] | undefined>()
+  const [issueList, setIssueList] = useState<IssueDTO[]>([])
   const [isError, setIsError] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [pageNum, setPageNum] = useState<number>(1)
+  const [isPageEnd, setIsPageEnd] = useState(false)
 
   const getIssuesApiCall = async () => {
     try {
       setIsError(false)
       setIsLoading(true)
-      const res = await getIssuesRequest(owner, repo, 1)
+      const res = await getIssuesRequest(owner, repo, pageNum)
       if (res.status === 200) {
         setIsLoading(false)
-        setIssueList(res.data)
+        setIssueList([...issueList, ...res.data])
+        setIsPageEnd(res.data.length < 30 ? true : false)
+        setPageNum(pageNum + 1)
         return
       }
       throw Error
@@ -49,6 +53,7 @@ const useIssue = () => {
     setIsError,
     isLoading,
     setIsLoading,
+    isPageEnd,
     getIssuesApiCall,
     isAdvView,
     handleAdvClick,
