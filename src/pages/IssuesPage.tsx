@@ -4,6 +4,8 @@ import useIssue from '../hooks/useIssue'
 import { createContext } from 'react'
 import { IssueDTO } from '../apis/issue'
 import IssueList from '../components/Issues/IssueList'
+import Select from '../components/Issues/Select'
+import IssueListError from '../components/Issues/IssueListError'
 export interface IssuesContextType {
   owner: string
   setOwner: React.Dispatch<React.SetStateAction<string>>
@@ -34,7 +36,7 @@ export const useFormContext = () => {
 }
 
 export default function IssuesPage() {
-  const { getIssuesApiCall } = useFormContext()
+  const { getIssuesApiCall, isError } = useFormContext()
 
   useEffect(() => {
     getIssuesApiCall()
@@ -51,7 +53,8 @@ export default function IssuesPage() {
           </option>
         </select>
       </div>
-      <IssueList />
+      <Select />
+      {isError ? <IssueListError /> : <IssueList />}
     </Wrapper>
   )
 }
