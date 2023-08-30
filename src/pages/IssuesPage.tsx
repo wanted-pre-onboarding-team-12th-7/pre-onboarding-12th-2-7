@@ -14,6 +14,8 @@ export interface IssuesContextType {
   isError: boolean
   setIsError: React.Dispatch<React.SetStateAction<boolean>>
   getIssuesApiCall: () => Promise<void>
+  isAdvView: (idx: number) => boolean
+  handleAdvClick: () => void
 }
 
 const IssuesContext = createContext<IssuesContextType | null>(null)

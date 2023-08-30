@@ -3,7 +3,10 @@ import { IssueDTO } from '../../apis/issue'
 import { useFormContext } from '../../pages/IssuesPage'
 
 function IssueList() {
-  const { issueList } = useFormContext()
+  const { issueList, isAdvView, handleAdvClick } = useFormContext()
+  const ADV_IMG_SRC =
+    'https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100'
+  const ADV_IMG_ALT = 'wanted_banner'
 
   return (
     <>
@@ -31,6 +34,9 @@ function IssueList() {
               {issue.comments}
             </div>
           </IssuesWrapper>
+          {isAdvView(idx) && (
+            <AdvImage alt={ADV_IMG_ALT} src={ADV_IMG_SRC} onClick={handleAdvClick} />
+          )}
         </div>
       ))}
     </>
@@ -39,6 +45,10 @@ function IssueList() {
 
 const IssuesWrapper = styled.div`
   margin: 20px 0;
+`
+
+const AdvImage = styled.img`
+  cursor: pointer;
 `
 
 export default IssueList
