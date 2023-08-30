@@ -1,7 +1,7 @@
 export default function Header() {
   return (
-    <div>
+    <header>
       <h1>Organization Name / Repository Name</h1>
-    </div>
+    </header>
   )
 }
