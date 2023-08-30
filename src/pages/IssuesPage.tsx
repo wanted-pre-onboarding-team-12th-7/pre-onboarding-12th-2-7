@@ -6,6 +6,7 @@ import { IssueDTO } from '../apis/issue'
 import IssueList from '../components/Issues/IssueList'
 import Select from '../components/Issues/Select'
 import IssueListError from '../components/Issues/IssueListError'
+import Loading from '../components/Issues/Loading'
 export interface IssuesContextType {
   owner: string
   setOwner: React.Dispatch<React.SetStateAction<string>>
@@ -15,6 +16,8 @@ export interface IssuesContextType {
   setIssueList: React.Dispatch<React.SetStateAction<IssueDTO[] | undefined>>
   isError: boolean
   setIsError: React.Dispatch<React.SetStateAction<boolean>>
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   getIssuesApiCall: () => Promise<void>
   isAdvView: (idx: number) => boolean
   handleAdvClick: () => void
@@ -36,7 +39,7 @@ export const useFormContext = () => {
 }
 
 export default function IssuesPage() {
-  const { getIssuesApiCall, isError } = useFormContext()
+  const { getIssuesApiCall, isError, isLoading } = useFormContext()
 
   useEffect(() => {
     getIssuesApiCall()
@@ -54,7 +57,7 @@ export default function IssuesPage() {
         </select>
       </div>
       <Select />
-      {isError ? <IssueListError /> : <IssueList />}
+      {isError ? <IssueListError /> : isLoading ? <Loading /> : <IssueList />}
     </Wrapper>
   )
 }
