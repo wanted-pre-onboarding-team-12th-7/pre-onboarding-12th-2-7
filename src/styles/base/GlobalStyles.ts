@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import { reset } from 'styled-reset'
 
-import { fontSizes } from '../constants/fontSize'
-
 const GlobalStyle = createGlobalStyle`
 ${reset},
     *,
@@ -15,11 +13,11 @@ ${reset},
     html, body {
         height: 100%;
         font-family: 'Noto Sans KR', sans-serif;
-        font-size: ${fontSizes.default};
-        color: ${({ theme }) => theme.textColor};
+        font-size: ${({ theme }) => theme.fontSizes.default};
+        color: ${({ theme }) => theme.colors.textColor};
     }
     body {
-        background: ${({ theme }) => theme.bgColor};
+        background: ${({ theme }) => theme.colors.bgColor};
     }
     a {
         color: inherit;
