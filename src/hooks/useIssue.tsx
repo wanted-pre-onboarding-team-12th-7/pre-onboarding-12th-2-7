@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { IssueDTO, getIssuesRequest } from '../apis/issue'
+import { useEffect, useState } from 'react'
+import { IssueDTO, issueAPI } from '../apis/issue'
 
 const useIssue = () => {
   const [owner, setOwner] = useState<string>('facebook')
@@ -10,16 +10,18 @@ const useIssue = () => {
   const [pageNum, setPageNum] = useState<number>(1)
   const [isPageEnd, setIsPageEnd] = useState(false)
 
+  const filterPureIssue = (data: IssueDTO[]) => data.filter((issue) => !issue.pull_request)
+
   const getIssuesApiCall = async () => {
     try {
       setIsError(false)
       setIsLoading(true)
-      const res = await getIssuesRequest(owner, repo, pageNum)
+      const res = await issueAPI.getIssueList(owner, repo, pageNum)
       if (res.status === 200) {
         setIsLoading(false)
         // FIXME: 다른 owner, repo를 조회할 때는 기존 배열에 추가하면 안 됨
-        setIssueList(res.data)
-        setIsPageEnd(res.data.length < 30 ? true : false)
+        setIssueList((prev) => prev.concat(filterPureIssue(res.data)))
+        setIsPageEnd(res.data.length < 30)
         setPageNum(pageNum + 1)
         return
       }
@@ -33,15 +35,9 @@ const useIssue = () => {
     }
   }
 
-  const isAdvView = (idx: number) => {
-    return (idx + 1) % 5 === 0
-  }
-
-  const handleAdvClick = () => {
-    const ADV_LINK_URL = 'https://www.wanted.co.kr/'
-    window.open(ADV_LINK_URL)
-    return
-  }
+  useEffect(() => {
+    getIssuesApiCall()
+  }, [])
 
   return {
     owner,
@@ -56,8 +52,6 @@ const useIssue = () => {
     setIsLoading,
     isPageEnd,
     getIssuesApiCall,
-    isAdvView,
-    handleAdvClick,
   }
 }
 

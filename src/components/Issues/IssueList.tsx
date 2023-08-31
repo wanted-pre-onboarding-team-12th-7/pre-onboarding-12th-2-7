@@ -1,17 +1,26 @@
 import { styled } from 'styled-components'
 import { IssueDTO } from '../../apis/issue'
-import { useFormContext } from '../../pages/IssuesPage'
+import { useIssueListContext } from '../../hooks/useIssueListContext'
+import { ReactNode } from 'react'
 
-function IssueList() {
-  const { issueList, isAdvView, handleAdvClick } = useFormContext()
-  const ADV_IMG_SRC =
-    'https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100'
-  const ADV_IMG_ALT = 'wanted_banner'
+interface IssueListProps {
+  AdElement?: ReactNode | null
+  adInterval: number
+}
+
+const isAdPosition = (idx: number, adInterval: number) => {
+  if (adInterval <= 0) throw Error('Wrong adInterval')
+  if (adInterval === 1) return true
+  return (idx + 1) % (adInterval - 1) === 0
+}
+
+function IssueList({ AdElement, adInterval }: IssueListProps) {
+  const { issueList } = useIssueListContext()
 
   return (
     <>
       {issueList?.map((issue: IssueDTO, idx: number) => (
-        <div key={idx}>
+        <div key={issue.number}>
           <IssuesWrapper>
             <div>
               <span>Number: </span>
@@ -34,9 +43,7 @@ function IssueList() {
               {issue.comments}
             </div>
           </IssuesWrapper>
-          {isAdvView(idx) && (
-            <AdvImage alt={ADV_IMG_ALT} src={ADV_IMG_SRC} onClick={handleAdvClick} />
-          )}
+          {isAdPosition(idx, adInterval) && AdElement}
         </div>
       ))}
     </>
@@ -45,10 +52,6 @@ function IssueList() {
 
 const IssuesWrapper = styled.div`
   margin: 20px 0;
-`
-
-const AdvImage = styled.img`
-  cursor: pointer;
 `
 
 export default IssueList
