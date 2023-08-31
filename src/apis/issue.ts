@@ -35,8 +35,8 @@ const getIssuesRequest = async (
   return { status, data }
 }
 
-const getIssueDetailRequest = async (issueNo: number) => {
-  const { data } = await Instance.get<IssueDTO>(`/repos/facebook/react/issues/${issueNo}`)
+const getIssueDetailRequest = async (owner: string, repo: string, issueNo: string) => {
+  const { data } = await Instance.get<IssueDTO>(`/repos/${owner}/${repo}/issues/${issueNo}`)
 
   return data
 }
