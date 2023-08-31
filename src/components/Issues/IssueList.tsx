@@ -1,7 +1,8 @@
+import { ReactNode } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { IssueDTO } from '../../apis/issue'
 import { useIssueListContext } from '../../hooks/useIssueListContext'
-import { ReactNode } from 'react'
-
 import * as S from './Issues.styled'
 
 interface IssueListProps {
@@ -17,11 +18,17 @@ const isAdPosition = (idx: number, adInterval: number) => {
 
 function IssueList({ AdElement, adInterval }: IssueListProps) {
   const { issueList } = useIssueListContext()
+  const navigate = useNavigate()
 
   return (
     <S.IssueListWrapper>
       {issueList?.map((issue: IssueDTO, idx: number) => (
-        <div key={issue.number}>
+        <div
+          key={issue.number}
+          onClick={() => {
+            navigate(`/issue/${issue.number}`)
+          }}
+        >
           <S.IssueListItem>
             <S.IssueListItemNumber>
               <span>Number: </span>
