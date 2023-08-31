@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IssueDTO, getIssuesRequest } from '../apis/issue'
+import { IssueDTO, issueAPI } from '../apis/issue'
 
 const useIssue = () => {
   const [owner, setOwner] = useState<string>('facebook')
@@ -14,11 +14,16 @@ const useIssue = () => {
     try {
       setIsError(false)
       setIsLoading(true)
-      const res = await getIssuesRequest(owner, repo, pageNum)
+      const res = await issueAPI.getIssueList<IssueDTO[]>(owner, repo, pageNum)
       if (res.status === 200) {
         setIsLoading(false)
         // FIXME: 다른 owner, repo를 조회할 때는 기존 배열에 추가하면 안 됨
-        setIssueList(res.data)
+        setIssueList((prev) => {
+          const pureNewIssues = res.data
+            .filter((issue) => !issue.pull_request)
+            .filter((issue) => !prev.find((prevIssue) => prevIssue.number === issue.number))
+          return prev.concat(pureNewIssues)
+        })
         setIsPageEnd(res.data.length < 30 ? true : false)
         setPageNum(pageNum + 1)
         return
