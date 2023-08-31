@@ -10,6 +10,8 @@ const useIssue = () => {
   const [pageNum, setPageNum] = useState<number>(1)
   const [isPageEnd, setIsPageEnd] = useState(false)
 
+  const filterPureIssue = (data: IssueDTO[]) => data.filter((issue) => !issue.pull_request)
+
   const getIssuesApiCall = async () => {
     try {
       setIsError(false)
@@ -18,13 +20,8 @@ const useIssue = () => {
       if (res.status === 200) {
         setIsLoading(false)
         // FIXME: 다른 owner, repo를 조회할 때는 기존 배열에 추가하면 안 됨
-        setIssueList((prev) => {
-          const pureNewIssues = res.data
-            .filter((issue) => !issue.pull_request)
-            .filter((issue) => !prev.find((prevIssue) => prevIssue.number === issue.number))
-          return prev.concat(pureNewIssues)
-        })
-        setIsPageEnd(res.data.length < 30 ? true : false)
+        setIssueList((prev) => prev.concat(filterPureIssue(res.data)))
+        setIsPageEnd(res.data.length < 30)
         setPageNum(pageNum + 1)
         return
       }
