@@ -17,13 +17,13 @@ export interface UserDTO {
 
 export const ISSUES_PER_PAGE = 20
 
-const getIssuesRequest = async <T>(
+const getIssuesRequest = async (
   owner: string,
   repo: string,
   pageNo: number,
   perPage = ISSUES_PER_PAGE
 ) => {
-  const { status, data } = await Instance.get(`/repos/${owner}/${repo}/issues`, {
+  const { status, data } = await Instance.get<IssueDTO[]>(`/repos/${owner}/${repo}/issues`, {
     params: {
       state: 'open',
       sort: 'comments',
@@ -32,7 +32,7 @@ const getIssuesRequest = async <T>(
     },
   })
 
-  return { status, data: data as T }
+  return { status, data }
 }
 
 const getIssueDetailRequest = async (issueNo: number) => {

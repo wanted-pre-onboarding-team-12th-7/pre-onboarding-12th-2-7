@@ -16,7 +16,7 @@ const useIssue = () => {
     try {
       setIsError(false)
       setIsLoading(true)
-      const res = await issueAPI.getIssueList<IssueDTO[]>(owner, repo, pageNum)
+      const res = await issueAPI.getIssueList(owner, repo, pageNum)
       if (res.status === 200) {
         setIsLoading(false)
         // FIXME: 다른 owner, repo를 조회할 때는 기존 배열에 추가하면 안 됨
