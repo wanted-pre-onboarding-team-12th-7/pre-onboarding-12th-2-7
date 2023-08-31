@@ -1,9 +1,9 @@
 import { styled } from 'styled-components'
 import { IssueDTO } from '../../apis/issue'
-import { useFormContext } from '../../pages/IssuesPage'
+import { useIssueListContext } from '../../pages/IssuesPage'
 
 function IssueList() {
-  const { issueList, isAdvView, handleAdvClick } = useFormContext()
+  const { issueList, isAdvView, handleAdvClick } = useIssueListContext()
   const ADV_IMG_SRC =
     'https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100'
   const ADV_IMG_ALT = 'wanted_banner'

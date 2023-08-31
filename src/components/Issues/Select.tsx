@@ -1,8 +1,8 @@
 import { styled } from 'styled-components'
-import { useFormContext } from '../../pages/IssuesPage'
+import { useIssueListContext } from '../../pages/IssuesPage'
 
 function Select() {
-  const { getIssuesApiCall, owner, setOwner, repo, setRepo } = useFormContext()
+  const { getIssuesApiCall, owner, setOwner, repo, setRepo } = useIssueListContext()
 
   return (
     <Wrapper>

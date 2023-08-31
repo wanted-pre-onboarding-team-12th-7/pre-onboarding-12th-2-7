@@ -31,7 +31,7 @@ export function IssuesProvider({ children }: PropsWithChildren) {
   return <IssuesContext.Provider value={{ ...issueState }}>{children}</IssuesContext.Provider>
 }
 
-export const useFormContext = () => {
+export const useIssueListContext = () => {
   const context = useContext(IssuesContext)
   if (context === null) {
     throw Error('FormContext is null!')
@@ -40,7 +40,7 @@ export const useFormContext = () => {
 }
 
 export default function IssuesPage() {
-  const { getIssuesApiCall, isError, isLoading, issueList, isPageEnd } = useFormContext()
+  const { getIssuesApiCall, isError, isLoading, issueList, isPageEnd } = useIssueListContext()
 
   useEffect(() => {
     getIssuesApiCall()
