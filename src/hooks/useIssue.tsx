@@ -38,16 +38,6 @@ const useIssue = () => {
     }
   }
 
-  const isAdvView = (idx: number) => {
-    return (idx + 1) % 5 === 0
-  }
-
-  const handleAdvClick = () => {
-    const ADV_LINK_URL = 'https://www.wanted.co.kr/'
-    window.open(ADV_LINK_URL)
-    return
-  }
-
   return {
     owner,
     setOwner,
@@ -61,8 +51,6 @@ const useIssue = () => {
     setIsLoading,
     isPageEnd,
     getIssuesApiCall,
-    isAdvView,
-    handleAdvClick,
   }
 }
 

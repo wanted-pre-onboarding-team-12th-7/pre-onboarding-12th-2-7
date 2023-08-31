@@ -1,10 +1,12 @@
 import { useEffect, useCallback, useRef } from 'react'
 import { styled } from 'styled-components'
-import IssueList from '../components/Issues/IssueList'
 import Select from '../components/Issues/Select'
 import IssueListError from '../components/Issues/IssueListError'
 import Loading from '../components/Issues/Loading'
 import { useIssueListContext } from '../hooks/useIssueListContext'
+import ImageBanner from '../components/Issues/ImageBanner'
+import IssueList from '../components/Issues/IssueList'
+import { ADVERTISEMENT } from '../components/Issues/constant'
 
 export default function IssuesPage() {
   const { getIssuesApiCall, isError, isLoading, issueList, isPageEnd } = useIssueListContext()
@@ -43,7 +45,18 @@ export default function IssuesPage() {
         </select>
       </div>
       <Select />
-      {isError ? <IssueListError /> : isLoading ? <Loading /> : <IssueList />}
+      {isError && <IssueListError />}
+      <IssueList
+        AdElement={
+          <ImageBanner
+            alt={ADVERTISEMENT.ISSUE_LIST.IMG_ALT}
+            link={ADVERTISEMENT.ISSUE_LIST.LINK_URL}
+            src={ADVERTISEMENT.ISSUE_LIST.IMG_SRC}
+          />
+        }
+        adInterval={5}
+      />
+      {isLoading && <Loading />}
       {isPageEnd && <div ref={loadMoreRef}>observer</div>}
     </Wrapper>
   )
