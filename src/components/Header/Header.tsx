@@ -1,7 +1,9 @@
+import * as S from './Header.styled'
+
 export default function Header() {
   return (
-    <header>
+    <S.Header>
       <h1>Organization Name / Repository Name</h1>
-    </header>
+    </S.Header>
   )
 }
