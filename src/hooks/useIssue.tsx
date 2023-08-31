@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IssueDTO, issueAPI } from '../apis/issue'
 
 const useIssue = () => {
@@ -37,6 +37,10 @@ const useIssue = () => {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    getIssuesApiCall()
+  }, [])
 
   return {
     owner,
