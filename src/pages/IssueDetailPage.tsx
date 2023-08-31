@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { styled } from 'styled-components'
@@ -8,6 +7,7 @@ import { useIssueListContext } from '../hooks/useIssueListContext'
 import { flex } from '../styles/constants/flex'
 import IssueTitle from '../components/Issues/IssueTitle'
 import Loading from '../components/Issues/Loading'
+import IssueBody from '../components/Issues/IssueBody'
 
 export default function IssueDetailPage() {
   const { owner, repo } = useIssueListContext()
@@ -42,6 +42,7 @@ export default function IssueDetailPage() {
     <OuterWrapper>
       <InnerWrapper>
         <IssueTitle item={item} />
+        <IssueBody item={item} />
       </InnerWrapper>
     </OuterWrapper>
   ) : (
@@ -60,5 +61,5 @@ const InnerWrapper = styled.div`
   padding: 18px 25px;
   border: 0.5px solid gray;
   border-radius: 10px;
-  background-color: #ffffff !important;
+  background-color: white;
 `
