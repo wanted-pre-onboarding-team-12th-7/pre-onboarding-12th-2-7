@@ -1,9 +1,13 @@
+import { useIssueListContext } from '../../hooks/useIssueListContext'
 import * as S from './Header.styled'
 
 export default function Header() {
+  const { owner, repo } = useIssueListContext()
   return (
     <S.Header>
-      <h1>Organization Name / Repository Name</h1>
+      <h1>
+        {owner} / {repo}
+      </h1>
     </S.Header>
   )
 }
