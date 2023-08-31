@@ -1,28 +1,25 @@
-import { styled } from 'styled-components'
 import { useIssueListContext } from '../../hooks/useIssueListContext'
+
+import * as S from './Issues.styled'
 
 function Select() {
   const { getIssuesApiCall, owner, setOwner, repo, setRepo } = useIssueListContext()
 
   return (
-    <Wrapper>
-      <div>
-        <span>owner: </span>
-        <input type="text" value={owner} onChange={(e) => setOwner(e.target.value)} />
-      </div>
-      <div>
-        <span>repo: </span>
-        <input type="text" value={repo} onChange={(e) => setRepo(e.target.value)} />
-      </div>
-      <button type="button" onClick={getIssuesApiCall}>
+    <S.SelectWrapper>
+      <S.FromRow>
+        <S.FormTitle>owner: </S.FormTitle>
+        <S.FormInput type="text" value={owner} onChange={(e) => setOwner(e.target.value)} />
+      </S.FromRow>
+      <S.FromRow>
+        <S.FormTitle>repo: </S.FormTitle>
+        <S.FormInput type="text" value={repo} onChange={(e) => setRepo(e.target.value)} />
+      </S.FromRow>
+      <S.FormButton type="button" onClick={getIssuesApiCall}>
         조회
-      </button>
-    </Wrapper>
+      </S.FormButton>
+    </S.SelectWrapper>
   )
 }
-
-const Wrapper = styled.form`
-  margin: 20px 0;
-`
 
 export default Select

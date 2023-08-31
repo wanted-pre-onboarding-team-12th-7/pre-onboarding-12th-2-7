@@ -1,11 +1,7 @@
-import { styled } from 'styled-components'
+import * as S from './Issues.styled'
 
 function Loading() {
-  return <Wrapper>Loading.....</Wrapper>
+  return <S.loadingWrapper>Loading.....</S.loadingWrapper>
 }
-
-const Wrapper = styled.div`
-  margin: 20px 0;
-`
 
 export default Loading

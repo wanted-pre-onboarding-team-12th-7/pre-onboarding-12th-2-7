@@ -11,7 +11,7 @@ export const Header = styled.header`
   font-size: ${fontSizes.medium};
   font-weight: bold;
   text-align: center;
-  background-color: ${({ theme }) => theme.bgColor};
+  background-color: ${({ theme }) => theme.boxColor};
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid ${colors.border};
 `
