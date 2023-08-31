@@ -17,6 +17,9 @@ ${reset},
         font-size: ${fontSizes.default};
         color: ${({ theme }) => theme.textColor};
     }
+    body {
+        background: ${({ theme }) => theme.bgColor};
+    }
     a {
         color: inherit;
         text-decoration: none;

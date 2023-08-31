@@ -1,5 +1,4 @@
 import { useEffect, useCallback, useRef } from 'react'
-import { styled } from 'styled-components'
 import Select from '../components/Issues/Select'
 import IssueListError from '../components/Issues/IssueListError'
 import Loading from '../components/Issues/Loading'
@@ -7,6 +6,8 @@ import { useIssueListContext } from '../hooks/useIssueListContext'
 import ImageBanner from '../components/Issues/ImageBanner'
 import IssueList from '../components/Issues/IssueList'
 import { ADVERTISEMENT } from '../components/Issues/constant'
+
+import * as S from '../components/Issues/Issues.styled'
 
 export default function IssuesPage() {
   const { getIssuesApiCall, isError, isLoading, issueList, isPageEnd } = useIssueListContext()
@@ -30,7 +31,7 @@ export default function IssuesPage() {
   }, [handleObserver])
 
   return (
-    <Wrapper>
+    <S.Wrapper>
       <Select />
       {isError && <IssueListError />}
       <IssueList
@@ -45,12 +46,6 @@ export default function IssuesPage() {
       />
       {isLoading && <Loading />}
       {isPageEnd && <div ref={loadMoreRef}>observer</div>}
-    </Wrapper>
+    </S.Wrapper>
   )
 }
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-`
