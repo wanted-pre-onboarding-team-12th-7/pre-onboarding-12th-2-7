@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { useIssueListContext } from '../../pages/IssuesPage'
+import { useIssueListContext } from '../../hooks/useIssueListContext'
 
 function Select() {
   const { getIssuesApiCall, owner, setOwner, repo, setRepo } = useIssueListContext()

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { IssueDTO } from '../../apis/issue'
-import { useIssueListContext } from '../../pages/IssuesPage'
+import { useIssueListContext } from '../../hooks/useIssueListContext'
 
 function IssueList() {
   const { issueList, isAdvView, handleAdvClick } = useIssueListContext()

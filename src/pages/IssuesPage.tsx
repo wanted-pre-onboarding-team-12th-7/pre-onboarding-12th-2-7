@@ -1,43 +1,10 @@
-import { PropsWithChildren, useContext, useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useRef } from 'react'
 import { styled } from 'styled-components'
-import useIssue from '../hooks/useIssue'
-import { createContext } from 'react'
-import { IssueDTO } from '../apis/issue'
 import IssueList from '../components/Issues/IssueList'
 import Select from '../components/Issues/Select'
 import IssueListError from '../components/Issues/IssueListError'
 import Loading from '../components/Issues/Loading'
-export interface IssuesContextType {
-  owner: string
-  setOwner: React.Dispatch<React.SetStateAction<string>>
-  repo: string
-  setRepo: React.Dispatch<React.SetStateAction<string>>
-  issueList: IssueDTO[] | undefined
-  setIssueList: React.Dispatch<React.SetStateAction<IssueDTO[]>>
-  isError: boolean
-  setIsError: React.Dispatch<React.SetStateAction<boolean>>
-  isLoading: boolean
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-  isPageEnd: boolean
-  getIssuesApiCall: () => Promise<void>
-  isAdvView: (idx: number) => boolean
-  handleAdvClick: () => void
-}
-
-const IssuesContext = createContext<IssuesContextType | null>(null)
-
-export function IssuesProvider({ children }: PropsWithChildren) {
-  const issueState = useIssue()
-  return <IssuesContext.Provider value={{ ...issueState }}>{children}</IssuesContext.Provider>
-}
-
-export const useIssueListContext = () => {
-  const context = useContext(IssuesContext)
-  if (context === null) {
-    throw Error('FormContext is null!')
-  }
-  return context
-}
+import { useIssueListContext } from '../hooks/useIssueListContext'
 
 export default function IssuesPage() {
   const { getIssuesApiCall, isError, isLoading, issueList, isPageEnd } = useIssueListContext()
