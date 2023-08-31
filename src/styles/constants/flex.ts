@@ -1,5 +1,6 @@
 export interface Flex {
   flexCenter: string
+  flexStart: string
   flexBetweenCenter: string
   flexColumnCenter: string
 }
@@ -9,6 +10,11 @@ export const flex: Flex = {
     display: flex;
     justify-content: center;
     align-items: center;
+  `,
+  flexStart: `
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
   `,
   flexBetweenCenter: `
     display: flex;
