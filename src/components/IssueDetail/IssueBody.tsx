@@ -1,17 +1,13 @@
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
-import { styled } from 'styled-components'
 import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 
-import { IssueDTO } from '../../apis/issue'
+import { IssueDetailType } from './type'
+import * as S from './IssueDetail.styled'
 
-interface BodyType {
-  item: IssueDTO
-}
-
-function IssueBody({ item }: BodyType) {
+function IssueBody({ item }: IssueDetailType) {
   return (
-    <Wrapper>
+    <S.Wrapper>
       <ReactMarkdown
         className="markdown"
         components={{
@@ -32,14 +28,8 @@ function IssueBody({ item }: BodyType) {
       >
         {item.body}
       </ReactMarkdown>
-    </Wrapper>
+    </S.Wrapper>
   )
 }
-
-export const Wrapper = styled.div`
-  .markdown > * {
-    all: revert;
-  }
-`
 
 export default IssueBody

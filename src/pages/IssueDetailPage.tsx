@@ -5,9 +5,9 @@ import { styled } from 'styled-components'
 import { IssueDTO, issueAPI } from '../apis/issue'
 import { useIssueListContext } from '../hooks/useIssueListContext'
 import { flex } from '../styles/constants/flex'
-import IssueTitle from '../components/Issues/IssueTitle'
+import IssueTitle from '../components/IssueDetail/IssueTitle'
 import Loading from '../components/Issues/Loading'
-import IssueBody from '../components/Issues/IssueBody'
+import IssueBody from '../components/IssueDetail/IssueBody'
 
 export default function IssueDetailPage() {
   const { owner, repo } = useIssueListContext()
