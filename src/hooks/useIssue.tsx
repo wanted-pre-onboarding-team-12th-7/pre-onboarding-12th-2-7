@@ -17,7 +17,8 @@ const useIssue = () => {
       const res = await getIssuesRequest(owner, repo, pageNum)
       if (res.status === 200) {
         setIsLoading(false)
-        setIssueList([...issueList, ...res.data])
+        // FIXME: 다른 owner, repo를 조회할 때는 기존 배열에 추가하면 안 됨
+        setIssueList(res.data)
         setIsPageEnd(res.data.length < 30 ? true : false)
         setPageNum(pageNum + 1)
         return
