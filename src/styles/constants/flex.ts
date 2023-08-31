@@ -10,8 +10,8 @@ export const flex: Flex = {
     align-items: center;
   `,
   flexBetweenCenter: `
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   `,
 }
