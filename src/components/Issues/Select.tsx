@@ -15,7 +15,7 @@ function Select() {
         <S.FormTitle>repo: </S.FormTitle>
         <S.FormInput type="text" value={repo} onChange={(e) => setRepo(e.target.value)} />
       </S.FromRow>
-      <S.FormButton type="button" onClick={getIssuesApiCall}>
+      <S.FormButton type="button" onClick={() => getIssuesApiCall('select')}>
         조회
       </S.FormButton>
     </S.SelectWrapper>

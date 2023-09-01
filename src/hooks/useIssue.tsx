@@ -8,7 +8,7 @@ const useIssue = () => {
   const [issueList, setIssueList] = useState<IssueDTO[]>([])
   const [isError, setIsError] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [pageNum, setPageNum] = useState<number>(1)
+  const [pageNo, setpageNo] = useState<number>(1)
   const [isPageEnd, setIsPageEnd] = useState(false)
 
   const filterPureIssue = (data: IssueDTO[]) => data.filter((issue) => !issue.pull_request)
@@ -21,26 +21,36 @@ const useIssue = () => {
     return
   }
 
-  const getIssuesApiCall = async () => {
+  const isSelectClick = () => {
+    setpageNo(1)
+    return 1
+  }
+
+  const getIssuesApiCall = async (mode: string) => {
     try {
       setIsError(false)
       setIsLoading(true)
-      const res = await issueAPI.getIssueList(owner, repo, pageNum)
+
+      const requestPageNo = mode === 'select' ? isSelectClick() : pageNo
+
+      const res = await issueAPI.getIssueList(owner, repo, requestPageNo)
       if (res.status === 200) {
         setIsLoading(false)
-        // FIXME: 다른 owner, repo를 조회할 때는 기존 배열에 추가하면 안 됨
-        if (pageNum !== 1) {
+        setIsPageEnd(res.data.length < ISSUES_PER_PAGE)
+
+        if (requestPageNo !== 1) {
           updateIssueList(filterPureIssue(res.data))
         } else {
           getIssueList(filterPureIssue(res.data))
         }
-        setIsPageEnd(res.data.length < ISSUES_PER_PAGE)
-        setPageNum(pageNum + 1)
+        setpageNo(pageNo + 1)
         return
       }
       throw Error
     } catch (err) {
       setIsError(true)
+      setIssueList([])
+
       console.error(err)
       return
     } finally {
@@ -49,7 +59,7 @@ const useIssue = () => {
   }
 
   useEffect(() => {
-    getIssuesApiCall()
+    getIssuesApiCall('scroll')
   }, [])
 
   return {

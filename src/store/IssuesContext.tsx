@@ -15,7 +15,7 @@ export interface IssuesContextType {
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   isPageEnd: boolean
-  getIssuesApiCall: () => Promise<void>
+  getIssuesApiCall: (mode: string) => Promise<void>
 }
 
 export const IssuesContext = createContext<IssuesContextType | null>(null)
