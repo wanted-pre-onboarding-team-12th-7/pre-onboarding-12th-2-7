@@ -16,3 +16,17 @@ Instance.interceptors.request.use((config) => {
 
   return config
 })
+
+Instance.interceptors.response.use(
+  function (response) {
+    return response
+  },
+
+  async function (error) {
+    const errorDataStatus = error.response.status
+
+    if (errorDataStatus >= 500) {
+      location.href = '/severerror'
+    }
+  }
+)
