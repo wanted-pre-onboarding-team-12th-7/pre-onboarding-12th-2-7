@@ -1,12 +1,11 @@
 import { DefaultTheme } from 'styled-components'
 
 import { colors } from '../constants/colors'
+import { flex } from '../constants/flex'
+import { fontSizes } from '../constants/fontSize'
 
 export const Theme: DefaultTheme = {
-  textColor: colors.black,
-  subTextColor: colors.darkgray,
-  bgColor: colors.lightGray,
-  boxColor: colors.opacityWhite,
-  primaryButtonColor: colors.black,
-  primaryButtonTextColor: colors.white,
+  colors,
+  fontSizes,
+  flex,
 }
