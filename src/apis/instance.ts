@@ -25,7 +25,7 @@ Instance.interceptors.response.use(
   async function (error) {
     const errorDataStatus = error.response.status
 
-    if (errorDataStatus >= 500) {
+    if (errorDataStatus >= 500 && errorDataStatus < 600) {
       location.href = '/severerror'
     }
   }
