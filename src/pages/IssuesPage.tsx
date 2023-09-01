@@ -45,7 +45,7 @@ export default function IssuesPage() {
         adInterval={5}
       />
       {isLoading && <Loading />}
-      {!isPageEnd && !isLoading && <S.LoadMoreBox ref={loadMoreRef}></S.LoadMoreBox>}
+      {!isPageEnd && !isLoading && !isError && <S.LoadMoreBox ref={loadMoreRef}></S.LoadMoreBox>}
     </S.Wrapper>
   )
 }
