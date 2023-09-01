@@ -17,7 +17,7 @@ export default function IssuesPage() {
     async ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       if (!entry.isIntersecting) return
       observer.unobserve(entry.target)
-      await getIssuesApiCall()
+      await getIssuesApiCall('scroll')
       observer.observe(entry.target)
     },
     [issueList]
