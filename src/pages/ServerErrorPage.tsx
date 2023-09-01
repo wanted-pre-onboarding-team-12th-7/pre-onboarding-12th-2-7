@@ -1,6 +1,6 @@
 import * as S from '../components/Error/Error.styled'
 
-export default function ErrorPage() {
+export default function ServerErrorPage() {
   return (
     <S.Wrapper>
       <S.Title>SERVER ERROR</S.Title>
