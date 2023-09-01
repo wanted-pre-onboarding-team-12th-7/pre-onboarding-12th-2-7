@@ -87,9 +87,11 @@ export const ErrorWrapper = styled.div`
   left: 0;
   top: 0;
   padding: 20px;
+  text-align: center;
+  line-height: 1.6em;
   color: ${({ theme }) => theme.colors.red};
   font-size: ${({ theme }) => theme.fontSizes.medium};
-  font-weight: bold;
+  font-weight: 500;
 `
 export const CloseButton = styled.button`
   color: ${({ theme }) => theme.colors.white};
