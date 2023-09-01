@@ -3,6 +3,7 @@ import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 
 import { IssueDetailType } from './type'
+
 import * as S from './IssueDetail.styled'
 
 function IssueBody({ item }: IssueDetailType) {

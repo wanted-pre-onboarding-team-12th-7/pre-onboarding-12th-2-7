@@ -3,7 +3,11 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    'import/resolver': {
+      typescript: {},
+    },
   },
+
   env: {
     browser: true,
     es2021: true,
@@ -26,7 +30,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['@typescript-eslint', 'react'],
+  plugins: ['@typescript-eslint', 'react', 'import'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',
@@ -50,8 +54,25 @@ module.exports = {
         namedComponents: 'function-declaration',
       },
     ],
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
     'no-multiple-empty-lines': 'error',
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }], // console.log() 금지
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'type', 'unknown'],
+        pathGroups: [
+          {
+            pattern: '{.,..}/**/*.styled',
+            group: 'object',
+          },
+        ],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+      },
+    ],
   },
 }

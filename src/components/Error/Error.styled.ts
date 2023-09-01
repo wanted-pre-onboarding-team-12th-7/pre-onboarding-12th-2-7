@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-import { flex } from '../../styles/constants/flex'
 import { colors } from './../../styles/constants/colors'
+import { flex } from '../../styles/constants/flex'
 import { fontSizes } from '../../styles/constants/fontSize'
 
 export const Wrapper = styled.div`

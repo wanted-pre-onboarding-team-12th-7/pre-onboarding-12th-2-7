@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { colors } from './../../styles/constants/colors'
 import { flex } from '../../styles/constants/flex'
 import { fontSizes } from '../../styles/constants/fontSize'

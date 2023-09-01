@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
-import { fontSizes } from '../../styles/constants/fontSize'
+
 import colors from '../../styles/constants/colors'
+import { fontSizes } from '../../styles/constants/fontSize'
 
 export const Header = styled.header`
   width: 100%;
