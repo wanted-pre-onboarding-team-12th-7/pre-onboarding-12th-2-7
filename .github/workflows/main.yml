@@ -19,6 +19,7 @@ jobs:
         uses: hkusu/review-assign-action@v1
         with:
           assignees: ${{ github.event.pull_request.user.login }}
+          reviewers: ${{ vars.REVIEWERS }}
           github-token: ${{ secrets.TOKEN }}
 
   project:
@@ -27,5 +28,5 @@ jobs:
       - uses: actions/add-to-project@main
         with:
           # https://github.com/<orgs-or-users>/<ownerName>/projects/<projectNumber>
-          project-url: https://github.com/orgs/wanted-pre-onboarding-team-12th-7/projects/4
+          project-url: ${{ vars.PROJECT_URL }}
           github-token: ${{ secrets.TOKEN }}
