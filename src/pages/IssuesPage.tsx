@@ -11,13 +11,14 @@ import { useIssueListContext } from '../hooks/useIssueListContext'
 import * as S from '../components/Issues/Issues.styled'
 
 export default function IssuesPage() {
-  const { getIssuesApiCall, isError, isLoading, issueList, isPageEnd } = useIssueListContext()
+  const { getIssuesApiCall, isError, isLoading, issueList, isPageEnd, owner, repo } =
+    useIssueListContext()
 
   const handleObserver = useCallback(
     async ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       if (!entry.isIntersecting) return
       observer.unobserve(entry.target)
-      await getIssuesApiCall()
+      await getIssuesApiCall(owner, repo)
       observer.observe(entry.target)
     },
     [issueList]
