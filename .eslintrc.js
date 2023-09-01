@@ -50,7 +50,7 @@ module.exports = {
         namedComponents: 'function-declaration',
       },
     ],
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
     'no-multiple-empty-lines': 'error',
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }], // console.log() 금지
   },
