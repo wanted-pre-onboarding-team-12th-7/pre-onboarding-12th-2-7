@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 import { IssueDTO, issueAPI } from '../apis/issue'
-import { useIssueListContext } from '../hooks/useIssueListContext'
-import { flex } from '../styles/constants/flex'
+import IssueBody from '../components/IssueDetail/IssueBody'
 import IssueTitle from '../components/IssueDetail/IssueTitle'
 import Loading from '../components/Issues/Loading'
-import IssueBody from '../components/IssueDetail/IssueBody'
+import { useIssueListContext } from '../hooks/useIssueListContext'
+import { flex } from '../styles/constants/flex'
 
 export default function IssueDetailPage() {
   const { owner, repo } = useIssueListContext()

@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Layout from '../components/Layout/Layout'
-import IssuesPage from './IssuesPage'
-import IssueDetailPage from './IssueDetailPage'
 import ErrorPage from './ErrorPage'
+import IssueDetailPage from './IssueDetailPage'
+import IssuesPage from './IssuesPage'
+import Layout from '../components/Layout/Layout'
 
 function Router() {
   return (

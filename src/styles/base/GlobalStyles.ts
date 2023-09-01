@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import { reset } from 'styled-reset'
+
 import { fontSizes } from '../constants/fontSize'
 
 const GlobalStyle = createGlobalStyle`

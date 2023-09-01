@@ -1,9 +1,9 @@
-import PageRouter from './pages/PageRouter'
-
 import { ThemeProvider } from 'styled-components'
-import GlobalStyle from './styles/base/GlobalStyles'
-import { Theme } from './styles/base/DefaultTheme'
+
+import PageRouter from './pages/PageRouter'
 import { IssuesProvider } from './store/IssuesContext'
+import { Theme } from './styles/base/DefaultTheme'
+import GlobalStyle from './styles/base/GlobalStyles'
 
 function App() {
   return (
