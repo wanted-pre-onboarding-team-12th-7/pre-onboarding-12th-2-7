@@ -44,6 +44,7 @@ export const IssueListWrapper = styled.div`
   background-color: ${({ theme }) => theme.boxColor};
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 `
 export const IssueListItem = styled.div`
   display: flex;
@@ -80,4 +81,7 @@ export const loadingWrapper = styled.div`
   ${flex.flexCenter}
   padding: 20px;
   font-weight: bold;
+`
+export const LoadMoreBox = styled.div`
+  visibility: hidden;
 `
