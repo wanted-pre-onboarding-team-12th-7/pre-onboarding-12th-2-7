@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { IssueDTO, issueAPI } from '../apis/issue'
+import { ISSUES_PER_PAGE, IssueDTO, issueAPI } from '../apis/issue'
 
 const useIssue = () => {
   const [owner, setOwner] = useState<string>('facebook')
@@ -11,6 +11,14 @@ const useIssue = () => {
   const [isPageEnd, setIsPageEnd] = useState(false)
 
   const filterPureIssue = (data: IssueDTO[]) => data.filter((issue) => !issue.pull_request)
+  const updateIssueList = (newData: IssueDTO[]) => {
+    setIssueList([...issueList, ...newData])
+    return
+  }
+  const getIssueList = (data: IssueDTO[]) => {
+    setIssueList(data)
+    return
+  }
 
   const getIssuesApiCall = async () => {
     try {
@@ -20,8 +28,12 @@ const useIssue = () => {
       if (res.status === 200) {
         setIsLoading(false)
         // FIXME: 다른 owner, repo를 조회할 때는 기존 배열에 추가하면 안 됨
-        setIssueList((prev) => prev.concat(filterPureIssue(res.data)))
-        setIsPageEnd(res.data.length < 30)
+        if (pageNum !== 1) {
+          updateIssueList(filterPureIssue(res.data))
+        } else {
+          getIssueList(filterPureIssue(res.data))
+        }
+        setIsPageEnd(res.data.length < ISSUES_PER_PAGE)
         setPageNum(pageNum + 1)
         return
       }

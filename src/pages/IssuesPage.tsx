@@ -14,11 +14,10 @@ export default function IssuesPage() {
 
   const handleObserver = useCallback(
     async ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      if (entry.isIntersecting) {
-        observer.unobserve(entry.target)
-        await getIssuesApiCall()
-        observer.observe(entry.target)
-      }
+      if (!entry.isIntersecting) return
+      observer.unobserve(entry.target)
+      await getIssuesApiCall()
+      observer.observe(entry.target)
     },
     [issueList]
   )
@@ -45,7 +44,7 @@ export default function IssuesPage() {
         adInterval={5}
       />
       {isLoading && <Loading />}
-      {isPageEnd && <div ref={loadMoreRef}>observer</div>}
+      {!isPageEnd && !isLoading && <S.LoadMoreBox ref={loadMoreRef}></S.LoadMoreBox>}
     </S.Wrapper>
   )
 }
