@@ -78,6 +78,30 @@ export const loadingWrapper = styled.div`
   padding: 20px;
   font-weight: bold;
 `
+export const ErrorWrapper = styled.div`
+  ${({ theme }) => theme.flex.flexCenter};
+  background-color: ${({ theme }) => theme.colors.dimmed};
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  padding: 20px;
+  text-align: center;
+  line-height: 1.6em;
+  color: ${({ theme }) => theme.colors.red};
+  font-size: ${({ theme }) => theme.fontSizes.medium};
+  font-weight: 500;
+`
+export const CloseButton = styled.button`
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 30px;
+  position: absolute;
+  right: 40px;
+  top: 20px;
+  background-color: transparent;
+  cursor: pointer;
+`
 export const LoadMoreBox = styled.div`
   visibility: hidden;
 `
