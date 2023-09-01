@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import { ISSUES_PER_PAGE, IssueDTO, issueAPI } from '../apis/issue'
-
 const useIssue = () => {
   const [owner, setOwner] = useState<string>('facebook')
   const [repo, setRepo] = useState<string>('react')
@@ -10,6 +9,7 @@ const useIssue = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [pageNo, setpageNo] = useState<number>(1)
   const [isPageEnd, setIsPageEnd] = useState(false)
+  const [isSelected, setIsSelected] = useState<boolean>(false)
 
   const filterPureIssue = (data: IssueDTO[]) => data.filter((issue) => !issue.pull_request)
   const updateIssueList = (newData: IssueDTO[]) => {
@@ -20,48 +20,41 @@ const useIssue = () => {
     setIssueList(data)
     return
   }
-
   const isSelectClick = () => {
     setpageNo(1)
     return 1
   }
-
   const getIssuesApiCall = async (mode: string) => {
     try {
       setIsError(false)
       setIsLoading(true)
-
       const requestPageNo = mode === 'select' ? isSelectClick() : pageNo
-
       const res = await issueAPI.getIssueList(owner, repo, requestPageNo)
       if (res.status === 200) {
         setIsLoading(false)
         setIsPageEnd(res.data.length < ISSUES_PER_PAGE)
-
         if (requestPageNo !== 1) {
           updateIssueList(filterPureIssue(res.data))
         } else {
           getIssueList(filterPureIssue(res.data))
         }
         setpageNo(pageNo + 1)
+        setIsSelected(mode === 'select')
         return
       }
       throw Error
     } catch (err) {
       setIsError(true)
       setIssueList([])
-
       console.error(err)
       return
     } finally {
       setIsLoading(false)
     }
   }
-
   useEffect(() => {
     getIssuesApiCall('scroll')
   }, [])
-
   return {
     owner,
     setOwner,
@@ -74,8 +67,8 @@ const useIssue = () => {
     isLoading,
     setIsLoading,
     isPageEnd,
+    isSelected,
     getIssuesApiCall,
   }
 }
-
 export default useIssue
