@@ -4,6 +4,7 @@ import ErrorPage from './ErrorPage'
 import IssueDetailPage from './IssueDetailPage'
 import IssuesPage from './IssuesPage'
 import Layout from '../components/Layout/Layout'
+import ServerErrorPage from '../pages/ServerErrorPage'
 
 function Router() {
   return (
@@ -13,6 +14,7 @@ function Router() {
           <Route index element={<IssuesPage />} />
           <Route element={<IssueDetailPage />} path="/issue/:number" />
         </Route>
+        <Route element={<ServerErrorPage />} path="/servererror" />
         <Route element={<ErrorPage />} path="*" />
       </Routes>
     </BrowserRouter>
